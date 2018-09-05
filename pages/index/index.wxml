@@ -1,7 +1,8 @@
-<page>
-  <view class="container">
-    <navigator url="../settings/settings">
-      <button class="weui-btn" type="primary" plain="true" bindtap="navToSettings">创建相册</button>
-    </navigator>
-  </view>
-</page>
+<view class="container">
+  <navigator url="../settings/settings">
+    <button class="weui-btn" type="primary" plain="true">create</button>
+  </navigator>
+  <navigator url="../album/album">
+    <button class="weui-btn" type="primary" plain="true">preview</button>
+  </navigator>
+</view>

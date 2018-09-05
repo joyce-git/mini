@@ -2,6 +2,7 @@
   "pages":[
     "pages/index/index",
     "pages/settings/settings",
+    "pages/album/album",
     "pages/logs/logs"
   ],
   "window":{

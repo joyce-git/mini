@@ -4,7 +4,7 @@
 		"ignore": []
 	},
 	"setting": {
-		"urlCheck": true,
+		"urlCheck": false,
 		"es6": true,
 		"postcss": true,
 		"minified": true,
@@ -27,13 +27,25 @@
 			"current": -1,
 			"list": []
 		},
+		"plugin": {
+			"current": -1,
+			"list": []
+		},
 		"game": {
 			"currentL": -1,
 			"list": []
 		},
 		"miniprogram": {
-			"current": -1,
-			"list": []
+			"current": 0,
+			"list": [
+				{
+					"id": 0,
+					"name": "scene=5b90397de1399f6c8d4d4bdf",
+					"pathName": "pages/album/album",
+					"query": "scene=5b90397de1399f6c8d4d4bdf",
+					"scene": "1011"
+				}
+			]
 		}
 	}
 }
