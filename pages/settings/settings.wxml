@@ -1,0 +1,38 @@
+<view class="page">
+  <view class="section_header">我的图片 {{images.length}}/3</view>
+  <view class="section_body">
+    <block wx:for="{{images}}" wx:key="*this">
+      <view class="weui-uploader__file" id="{{item}}">
+        <image class="weui-uploader__img" bindtap="previewImage" src="{{item}}" mode="aspectFill" />
+        <icon type="cancel" size="23" data-index="{{index}}" bindtap="deleteImage"></icon>
+      </view>
+    </block>
+    <view wx:if="{{images.length < 3}}" class="weui-uploader__input-box">
+      <view class="weui-uploader__input" bindtap="chooseImage"></view>
+    </view>
+  </view>
+
+  <view class="section_header">我的简介</view>
+  <view class="section_body">
+      <view class="weui-cell__hd">
+        <view class="weui-label">姓名</view>
+      </view>
+      <view class="weui-cell__bd">
+        <input class="weui-input" placeholder="请输入姓名"/>
+      </view>
+          <view class="weui-cell__hd">
+        <view class="weui-label">年龄</view>
+      </view>
+      <view class="weui-cell__bd">
+        <input class="weui-input"/>
+      </view>
+      <view class="weui-cell__hd">
+        <view class="weui-label">职业</view>
+      </view>
+      <view class="weui-cell__bd">
+        <textarea class="weui-textarea" style="height: 3.3em" />
+        <view class="weui-textarea-counter">0/12</view>
+      </view>
+  </view>
+
+</view>
