@@ -1,5 +1,5 @@
 <view class="page">
-  <view class="section_header">我的图片 {{images.length}}/3</view>
+  <view class="section_header">图片 {{images.length}}/3</view>
   <view class="section_body">
     <block wx:for="{{images}}" wx:key="*this">
       <view class="weui-uploader__file" id="{{item}}">
@@ -12,7 +12,7 @@
     </view>
   </view>
 
-  <view class="section_header">我的简介</view>
+  <view class="section_header">简介</view>
   <view class="section_body">
       <view class="weui-cell__hd">
         <view class="weui-label">姓名</view>
@@ -34,5 +34,7 @@
         <view class="weui-textarea-counter">0/12</view>
       </view>
   </view>
+
+  <button class="weui-btn" type="primary" plain="true" bindtap="submit">submit</button>
 
 </view>

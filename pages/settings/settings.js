@@ -1,11 +1,8 @@
 // pages/settings/settings.js
 Page({
-
-  /**
-   * 页面的初始数据
-   */
   data: {
-    images: []
+    images: [],
+    server: 'https://safe-savannah-64671.herokuapp.com/upload/',
   },
 
   /**
@@ -51,7 +48,7 @@ Page({
   },
 
   chooseImage: function (e) {
-    var that = this;
+    let that = this;
     wx.chooseImage({
       sizeType: ['original', 'compressed'],
       sourceType: ['album'],
@@ -66,11 +63,11 @@ Page({
   },
 
   deleteImage: function (e) {
-    //let that = this;
-    let images = this.data.images;
+    let that = this;
+    let images = that.data.images;
     let index = e.currentTarget.dataset.index;
     images.splice(index, 1);
-    this.setData({
+    that.setData({
       images: images,
     });
   },
@@ -80,5 +77,36 @@ Page({
       current: e.currentTarget.id, // 当前显示图片的http链接
       urls: this.data.images // 需要预览的图片http链接列表
     })
-  }
+  },
+
+  submit: function (e) {
+    let filePaths = this.data.images;
+    let i = 0, length = filePaths.length;
+    this.uploadFiles(filePaths, i, length);
+  },
+
+  uploadFiles(filePaths, i, length) {
+    let that = this;
+    wx.uploadFile({
+      url: that.data.server,
+      filePath: filePaths[0],
+      name: "file",
+      header: {
+        "Content-Type": "multipart/form-data",
+        "accept": "application/json"
+      },
+      success: (res) => {
+        let data = res.data;
+        console.log(res);
+      },
+      complete: () => {
+        i++;
+        if (i < length) {
+          this.uploadFiles(filePaths, i, length);
+        }
+      }
+    });
+  }   
+
+
 })
