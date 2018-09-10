@@ -1,0 +1,9 @@
+/* pages/templates/album.wxss */
+image {
+  height: 100%;
+  width: 100%;
+}
+
+swiper {
+  height: 90%;
+}

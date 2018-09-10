@@ -1,14 +1,15 @@
 {
-  "pages":[
+  "pages": [
     "pages/index/index",
     "pages/settings/settings",
     "pages/album/album",
-    "pages/logs/logs"
+    "pages/logs/logs",
+    "pages/templates/templates"
   ],
-  "window":{
-    "backgroundTextStyle":"light",
+  "window": {
+    "backgroundTextStyle": "light",
     "navigationBarBackgroundColor": "#fff",
     "navigationBarTitleText": "某人",
-    "navigationBarTextStyle":"black"
+    "navigationBarTextStyle": "black"
   }
 }

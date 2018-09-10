@@ -1,8 +1,12 @@
 <view class="container">
+  <block wx:if="{{hasImages}}">
+    <import src="../templates/templates.wxml" />
+    <template is="albumSwiper" data="{{images}}"></template>
+  </block>
+  <block wx:else>
+    <text>Welcome</text>
+  </block>
   <navigator url="../settings/settings">
-    <button class="weui-btn" type="primary" plain="true">create</button>
-  </navigator>
-  <navigator url="../album/album">
-    <button class="weui-btn" type="primary" plain="true">preview</button>
+    <button class="weui-btn" type="primary" plain="true">{{label}}</button>
   </navigator>
 </view>

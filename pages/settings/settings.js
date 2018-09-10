@@ -1,7 +1,9 @@
 // pages/settings/settings.js
+const app = getApp()
+
 Page({
   data: {
-    images: [],
+    images: null,
     server: 'https://safe-savannah-64671.herokuapp.com/upload/',
   },
 
@@ -64,7 +66,17 @@ Page({
         }
       }
     });
-  }   
+  },
+
+  onLoad: function () {
+    if (app.globalData.images) {
+      this.setData({ images: app.globalData.images });
+    } else {
+      app.userDocumentReadyCallback = res => {
+        this.setData({ images: res.data.images });
+      }
+    } 
+  }
 
 
 })

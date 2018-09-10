@@ -83,6 +83,13 @@ App({
       success: res => {
         if (res.statusCode == "200") {
           that.globalData.images = res.data.images;
+          if (that.globalData.images && that.globalData.images.length) {
+            that.globalData.hasImages = true;
+
+            if (that.userDocumentReadyCallback) {
+              that.userDocumentReadyCallback(res)
+            }
+          }
         } else if (res.statusCode == "204") {
           console.log("User NOT found");
         }
@@ -95,9 +102,9 @@ App({
   },
 
   globalData: {
-    userInfo: null,
     token_id: null,
-    images: [],
+    images: null,
+    hasImages: false,
     server: 'http://localhost:3000/',
     server2: 'https://safe-savannah-64671.herokuapp.com/' ||'http://localhost:3000/'
   }

@@ -4,8 +4,6 @@ Page({
   data: {
     server: 'https://safe-savannah-64671.herokuapp.com/links/',
     images: [],
-    indicatorDots: true,
-    circular: true,
   },
 
   onLoad: function (e) {

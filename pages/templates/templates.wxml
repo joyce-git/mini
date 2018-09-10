@@ -1,0 +1,14 @@
+<!--pages/templates/album.wxml.wxml-->
+<template name="albumSwiper">
+  <swiper indicator-dots="true" circular="true">
+    <block wx:for="{{images}}" wx:key="*this">
+      <swiper-item>
+        <image src="{{item}}" mode="aspectFit" />
+      </swiper-item>
+    </block>
+  </swiper>
+</template>
+
+<template name="btnToSettings">
+  <button class="weui-btn" type="primary" plain="true" bindtap="clickNavToSettings">{{label}}</button>
+</template>
