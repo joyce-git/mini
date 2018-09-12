@@ -82,7 +82,8 @@ App({
       },
       success: res => {
         if (res.statusCode == "200") {
-          that.globalData.images = res.data.images;
+          that.globalData.user = res.data;
+          that.globalData.images = that.globalData.user.images;
           if (that.globalData.images && that.globalData.images.length) {
             that.globalData.hasImages = true;
 
@@ -104,6 +105,7 @@ App({
   globalData: {
     token_id: null,
     images: null,
+    user: null,
     hasImages: false,
     server: 'http://localhost:3000/',
     server2: 'https://safe-savannah-64671.herokuapp.com/' ||'http://localhost:3000/'

@@ -3,8 +3,9 @@ const app = getApp()
 
 Page({
   data: {
+    user: null,
     images: null,
-    server: 'https://safe-savannah-64671.herokuapp.com/upload/',
+    server: 'http://localhost:3000/'||'https://safe-savannah-64671.herokuapp.com/upload/',
   },
 
   chooseImage: function (e) {
@@ -24,7 +25,7 @@ Page({
 
   deleteImage: function (e) {
     let that = this;
-    let images = that.data.images;
+    let images = that.data.user.images;
     let index = e.currentTarget.dataset.index;
     images.splice(index, 1);
     that.setData({
@@ -35,12 +36,12 @@ Page({
   previewImage: function (e) {
     wx.previewImage({
       current: e.currentTarget.id, // 当前显示图片的http链接
-      urls: this.data.images // 需要预览的图片http链接列表
+      urls: this.data.user.images // 需要预览的图片http链接列表
     })
   },
 
   submit: function (e) {
-    let filePaths = this.data.images;
+    let filePaths = this.data.user.images;
     let i = 0, length = filePaths.length;
     this.uploadFiles(filePaths, i, length);
   },
@@ -69,11 +70,11 @@ Page({
   },
 
   onLoad: function () {
-    if (app.globalData.images) {
-      this.setData({ images: app.globalData.images });
+    if (app.globalData.user) {
+      this.setData({ user: app.globalData.user });
     } else {
       app.userDocumentReadyCallback = res => {
-        this.setData({ images: res.data.images });
+        this.setData({ user: res.data });
       }
     } 
   }

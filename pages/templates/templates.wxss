@@ -5,5 +5,5 @@ image {
 }
 
 swiper {
-  height: 90%;
+  height: 80%;
 }
