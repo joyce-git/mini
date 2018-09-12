@@ -31,16 +31,19 @@
         <input class="weui-input" placeholder="单位" value="{{user.organization}}"/>
       </view>      
       <view class="weui-cell__hd">
-        <view class="weui-label">生日</view>
+        <view class="weui-label">年龄</view>
       </view>
       <view class="weui-cell__bd">
-        <input class="weui-input" placeholder="生日"  value="{{user.DOB}}"/>
+        <input class="weui-input" placeholder="年龄"  value="{{user.age}}"/>
       </view>
       <view class="weui-cell__hd">
         <view class="weui-label">性别</view>
       </view>
       <view class="weui-cell__bd">
-        <input class="weui-input" placeholder="性别"  value="{{user.gender}}"/>
+        <radio-group class="radio-group" bindchange="radioChange">
+          <label class="radio"><radio value="0" checked="{{user.gender}}" />女</label>
+          <label class="radio"><radio value="1"  checked="{{user.gender}}" />男</label>
+        </radio-group>
       </view>      
   </view>
 

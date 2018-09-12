@@ -1,0 +1,3 @@
+<text>你的名字</text>
+<input class="weui-input" placeholder="名字"/>
+<button class="weui-btn" type="primary" plain="true" bindtap="next">next</button>
