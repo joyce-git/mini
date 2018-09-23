@@ -4,8 +4,9 @@ const app = getApp()
 Page({
   data: {
     user: null,
+    originalImages: null,
     images: null,
-    server: 'http://localhost:3000/'||'https://safe-savannah-64671.herokuapp.com/upload/',
+    server: 'http://localhost:3000/'||'https://safe-savannah-64671.herokuapp.com/',
   },
 
   chooseImage: function (e) {
@@ -13,7 +14,7 @@ Page({
     wx.chooseImage({
       sizeType: ['original', 'compressed'],
       sourceType: ['album'],
-      count: 3,
+      count: 3 - that.data.images.length,
       success: function (res) {
         // 返回选定照片的本地文件路径列表，tempFilePath可以作为img标签的src属性显示图片
         that.setData({
@@ -41,20 +42,63 @@ Page({
   },
 
   submit: function (e) {
-    let filePaths = this.data.user.images;
-    let i = 0, length = filePaths.length;
-    this.uploadFiles(filePaths, i, length);
+    let filePaths = this.data.images;
+    let deletedImages = [];
+    for (let i=0; i< this.data.originalImages.length; i++) {
+      let image = this.data.originalImages[i];
+      if (!filePaths.includes(image)) {
+        deletedImages.push(image);
+      }
+    }
+    let newImages = [];
+    for (let i=0; i<filePaths.length; i++) {
+      let image = filePaths[i];
+      if (!this.data.originalImages.includes(image)) {
+        newImages.push(image);
+      }
+    }  
+    if (deletedImages.length > 0) { 
+      this.deleteFiles(deletedImages);
+    }
+    if (newImages.length > 0) {
+      this.uploadFiles(newImages, 0, newImages.length);
+    }
   },
 
-  uploadFiles(filePaths, i, length) {
+  deleteFiles(deletedImages) {
+    let that = this;
+    wx.request({
+      url: that.data.server + "images/delete",
+      method: 'POST',
+      header: { 'content-type': 'application/x-www-form-urlencoded' },
+      data: {
+        token_id: app.globalData.token_id,
+        deletedImages: deletedImages
+      },
+      success: res => {
+        if (res.statusCode == "200") {
+          // pass
+        }
+      },
+      fail: res => {
+        console.log("Delete Images Failed");
+        console.log(res);
+      }
+    })
+  },
+
+  uploadFiles(filePaths, i, length) {   
     let that = this;
     wx.uploadFile({
-      url: that.data.server,
-      filePath: filePaths[0],
+      url: that.data.server + "images/upload",
+      filePath: filePaths[i],
       name: "file",
       header: {
         "Content-Type": "multipart/form-data",
         "accept": "application/json"
+      },
+      formData: {
+        token_id: app.globalData.token_id
       },
       success: (res) => {
         let data = res.data;
@@ -71,10 +115,18 @@ Page({
 
   onLoad: function () {
     if (app.globalData.user) {
-      this.setData({ user: app.globalData.user });
+      this.setData({ 
+        user: app.globalData.user,
+        originalImages: app.globalData.user.images,
+        images: app.globalData.user.images
+      });
     } else {
       app.userDocumentReadyCallback = res => {
-        this.setData({ user: res.data });
+        this.setData({
+          user: res.data,
+          originalImages: res.data.images,
+          images: app.globalData.user.images
+        });
       }
     } 
   }

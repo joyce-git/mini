@@ -1,6 +1,6 @@
 <view class="page">
   <view class="section_body">
-    <block wx:for="{{user.images}}" wx:key="*this">
+    <block wx:for="{{images}}" wx:key="*this">
       <view class="weui-uploader__file" id="{{item}}">
         <image class="weui-uploader__img" bindtap="previewImage" src="{{item}}" mode="aspectFill" />
         <icon type="cancel" size="23" data-index="{{index}}" bindtap="deleteImage"></icon>
