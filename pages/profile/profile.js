@@ -77,12 +77,11 @@ Page({
       },
       success: res => {
         if (res.statusCode == "200") {
-          // pass
+          app.globalData.user = res.data;
         }
       },
-      fail: res => {
-        console.log("Delete Images Failed");
-        console.log(res);
+      fail: err => {
+        console.log(err);
       }
     })
   },
@@ -101,8 +100,9 @@ Page({
         token_id: app.globalData.token_id
       },
       success: (res) => {
-        let data = res.data;
-        console.log(res);
+        if (res.statusCode == "200") {
+          app.globalData.user = JSON.parse(res.data);
+        }
       },
       complete: () => {
         i++;
@@ -115,6 +115,7 @@ Page({
 
   onLoad: function () {
     if (app.globalData.user) {
+      console.log(app.globalData.user);
       this.setData({ 
         user: app.globalData.user,
         originalImages: app.globalData.user.images,
@@ -125,7 +126,7 @@ Page({
         this.setData({
           user: res.data,
           originalImages: res.data.images,
-          images: app.globalData.user.images
+          images: res.user.images
         });
       }
     } 
