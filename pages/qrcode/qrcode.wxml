@@ -1,0 +1,2 @@
+<!--pages/qrcode/qrcode.wxml-->
+<image src="data:image/png;base64,{{qrcode}}" mode="aspectFit" />

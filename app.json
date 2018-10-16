@@ -5,7 +5,8 @@
     "pages/name/name",
     "pages/album/album",
     "pages/logs/logs",
-    "pages/templates/templates"
+    "pages/templates/templates",
+    "pages/qrcode/qrcode"
   ],
   "window": {
     "backgroundTextStyle": "light",

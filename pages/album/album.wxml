@@ -1,9 +1,5 @@
-<view class="container">
-  <swiper indicator-dots="true" circular="true">
-    <block wx:for="{{images}}" wx:key="*this">
-      <swiper-item>
-        <image src="{{item}}" mode="aspectFit" />
-      </swiper-item>
-    </block>
-  </swiper>
-</view>
+<!-- <view class="container">
+    <import src="../templates/templates.wxml" />
+    <template is="albumSwiper" data="{{albumOwner.images}}"></template>
+    <text>{{albumOwner.name}}, {{albumOwner.age}}</text>
+</view> -->

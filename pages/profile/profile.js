@@ -58,14 +58,13 @@ Page({
       }
     }  
     if (deletedImages.length > 0) { 
-      this.deleteFiles(deletedImages);
-    }
-    if (newImages.length > 0) {
+      this.deleteAndUploadFiles(deletedImages, newImages);
+    } else {
       this.uploadFiles(newImages, 0, newImages.length);
     }
   },
 
-  deleteFiles(deletedImages) {
+  deleteAndUploadFiles(deletedImages, newImages) {
     let that = this;
     wx.request({
       url: that.data.server + "images/delete",
@@ -77,7 +76,14 @@ Page({
       },
       success: res => {
         if (res.statusCode == "200") {
-          app.globalData.user = res.data;
+          if (newImages.length > 0) {
+            this.uploadFiles(newImages, 0, newImages.length);
+          } else {
+            app.globalData.user = res.data;
+            wx.navigateBack({
+              delta: 1
+            });
+          }
         }
       },
       fail: err => {
@@ -86,7 +92,8 @@ Page({
     })
   },
 
-  uploadFiles(filePaths, i, length) {   
+  uploadFiles(filePaths, i, length) {
+    console.log("UPLOAD STARTS");
     let that = this;
     wx.uploadFile({
       url: that.data.server + "images/upload",
@@ -102,6 +109,12 @@ Page({
       success: (res) => {
         if (res.statusCode == "200") {
           app.globalData.user = JSON.parse(res.data);
+          console.log(JSON.parse(res.data));
+          if (i+1 >= filePaths.length) {
+            wx.navigateBack({
+              delta: 1
+            });
+          }
         }
       },
       complete: () => {
@@ -115,7 +128,6 @@ Page({
 
   onLoad: function () {
     if (app.globalData.user) {
-      console.log(app.globalData.user);
       this.setData({ 
         user: app.globalData.user,
         originalImages: app.globalData.user.images,

@@ -6,6 +6,7 @@
     <navigator url="../profile/profile">
       <button class="weui-btn" type="primary" plain="true">update</button>
     </navigator>
+    <button class="weui-btn" type="primary" plain="true">QR code</button>
   </block>
   <block wx:else>
     <text>Welcome</text>
